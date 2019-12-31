@@ -1,0 +1,15 @@
+{
+    "name": "jasper/linked-list",
+    "authors": [
+        {
+            "name": "jasper",
+            "email": "240023810@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Jasper\\LinkedList\\":"src/"
+        }
+    }
+}
