@@ -31,7 +31,7 @@ class Linklist
         $prev = $this->head;
 
         for ($i=0;$i<$index;$i++){
-            //循环遍历找到要插入位置的节点，所以这个时间复杂度为O(1)
+            //循环遍历找到要插入位置的节点，所以这个时间复杂度为O(n)
             $prev = $prev->next;
         }
 
@@ -149,6 +149,27 @@ class Linklist
             $prev = $prev->next;
         }
         return implode('->',$r);
+    }
+
+
+    public function reverseList()
+    {
+        if($this->head == NULL || $this->head->next ==null){
+            return $this->head;
+        }
+        $prev = null;
+        $cur = $this->head->next;
+        while ($cur) {
+            // save next
+            $next = $cur->next;
+            // move cur to head
+            $this->head->next = $cur;
+            $cur->next = $prev;
+            // iterate
+            $prev = $cur;
+            $cur = $next;
+        }
+
     }
 
 }
