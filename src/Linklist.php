@@ -27,15 +27,18 @@ class Linklist
     public function add($index, $value)
     {
         if($index > $this->size) throw new \Exception('超过链表范围');
-
+        //前驱指针 为当前节点的上一个节点。
         $prev = $this->head;
 
         for ($i=0;$i<$index;$i++){
+            //循环遍历找到上一个节点，所以这个时间复杂度为O(1)
             $prev = $prev->next;
         }
 
+        //上一个节点的后驱指针要指向插入的节点
         $prev->next = new Node($value,$prev->next);
 
+        //修改链表的长度
         $this->size++;
     }
 
