@@ -27,11 +27,11 @@ class Linklist
     public function add($index, $value)
     {
         if($index > $this->size) throw new \Exception('超过链表范围');
-        //前驱指针 为当前节点的上一个节点。
+        //先获取头结点
         $prev = $this->head;
 
         for ($i=0;$i<$index;$i++){
-            //循环遍历找到上一个节点，所以这个时间复杂度为O(1)
+            //循环遍历找到要插入位置的节点，所以这个时间复杂度为O(1)
             $prev = $prev->next;
         }
 
@@ -51,7 +51,7 @@ class Linklist
     public function edit($index,$value)
     {
         if($index > $this->size-1) throw new \Exception('超过链表范围');
-
+        //获取头结点的下一个节点
         $prev = $this->head->next;
 
         for ($i=0;$i<=$index;$i++){
@@ -70,6 +70,7 @@ class Linklist
             if($i==$index) return $prev;
             $prev = $prev->next;
         }
+        return -1;
     }
 
 
@@ -85,6 +86,59 @@ class Linklist
         $this->size--;
     }
 
+
+    public function iscontain($value){
+        $prev = $this->head->next;
+        while($prev){
+            if($prev->val==$value){
+                return true;
+            }
+            $prev = $prev->next;
+        }
+        return false;
+    }
+
+
+    public function removeFileds($value){
+        $prev = $this->head;
+        while ($prev->next){
+            if($prev->val == $value){
+                $prev->val = $prev->next->val;
+                $prev->next=$prev->next->next;
+            }else{
+                $prev = $prev->next;
+            }
+        }
+    }
+
+
+    public function removeFieldsByRecursion($value){
+        $this->head = $this->removeByRecursion($this->head,$value);
+        return $this->head;
+    }
+
+    public function removeByRecursion($node,$value,$level=0){
+        if($node->next == null){
+            $this->showDeep($level,$node->val);
+            return $node->val == $value ? $node->next:$node;
+        }
+        $this->showDeeep($level,$node->val);
+        $node->next = $this->removeByRecursion( $node->next,$value,++$level );
+        $this->showDeeep($level,$node->val);
+        return $node->val == $value ? $node->next:$node;
+
+    }
+
+    public function showDeep( $level=1,$val ){
+        if( $level<1 ){
+            return false;
+        }
+
+        while($level--){
+            echo '-';
+        }
+        echo "$val\n";
+    }
 
     public function __toString()
     {

@@ -14,4 +14,9 @@ class Node
         $this->val =$val;
         $this->next = $next;
     }
+
+    public function __toString()
+    {
+        return '当前节点值:'.$this->val.PHP_EOL;
+    }
 }
