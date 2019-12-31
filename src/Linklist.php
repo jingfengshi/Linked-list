@@ -158,15 +158,18 @@ class Linklist
             return $this->head;
         }
         $prev = null;
+        //获取第二个节点
         $cur = $this->head->next;
         while ($cur) {
-            // save next
+            // 缓存下一个节点
             $next = $cur->next;
-            // move cur to head
             $this->head->next = $cur;
+            //将当前节点的下个节点改为null
             $cur->next = $prev;
             // iterate
+            //交换节点，将上一节点内容换成当前节点
             $prev = $cur;
+            //将当前节点的改为一下个节点内容
             $cur = $next;
         }
 
